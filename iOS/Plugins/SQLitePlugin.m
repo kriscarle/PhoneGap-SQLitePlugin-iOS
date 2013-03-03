@@ -11,6 +11,8 @@
 
 
 #import "SQLitePlugin.h"
+#import "NSData+Base64.m"
+#import "NSData+Base64.h"
 
 @implementation SQLitePlugin
 
@@ -151,7 +153,8 @@
     NSObject *bindval;
     NSObject *insertId;
     NSObject *rowsAffected;
-
+    NSData *nsData;
+    
     hasInsertId = NO;
     previousRowsAffected = sqlite3_total_changes(db);
     previousInsertId = sqlite3_last_insert_rowid(db);
@@ -193,7 +196,10 @@
                             [entry setObject:columnValue forKey:columnName];
                             break;
                         case SQLITE_BLOB:
-
+			    nsData = [[NSData alloc] initWithBytes:sqlite3_column_blob(statement, i) length:sqlite3_column_bytes(statement, i)];
+                            columnValue = [nsData base64EncodingWithLineLength:0];
+                            columnName = [NSString stringWithFormat:@"%s", sqlite3_column_name(statement, i)];
+                            [entry setObject:columnValue forKey:columnName];
                             break;
                         case SQLITE_FLOAT:
                             columnValue = [NSNumber numberWithFloat: sqlite3_column_double(statement, i)];
