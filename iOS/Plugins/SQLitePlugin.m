@@ -11,8 +11,7 @@
 
 
 #import "SQLitePlugin.h"
-#import "NSData+Base64.m"
-#import "NSData+Base64.h"
+#import "../../CordovaLib/Classes/NSData+Base64.h"
 
 @implementation SQLitePlugin
 
@@ -196,8 +195,8 @@
                             [entry setObject:columnValue forKey:columnName];
                             break;
                         case SQLITE_BLOB:
-			    nsData = [[NSData alloc] initWithBytes:sqlite3_column_blob(statement, i) length:sqlite3_column_bytes(statement, i)];
-                            columnValue = [nsData base64EncodingWithLineLength:0];
+                            nsData = [[NSData alloc] initWithBytes:sqlite3_column_blob(statement, i) length:sqlite3_column_bytes(statement, i)];
+                            columnValue = [nsData base64EncodedString];
                             columnName = [NSString stringWithFormat:@"%s", sqlite3_column_name(statement, i)];
                             [entry setObject:columnValue forKey:columnName];
                             break;
