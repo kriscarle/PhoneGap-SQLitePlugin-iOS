@@ -1,3 +1,12 @@
+# BLOB Support
+
+This is a fork to add BLOB support. Since 99% of people won't need BLOBs I'm not planning on submitting this as a pull request.
+
+The BLOB support is based on https://github.com/stdavis/OfflineMbTiles
+
+--------------
+Original README
+=======================
 # Cordova/PhoneGap SQLitePlugin - iOS version
 
 Native interface to sqlite in a Cordova/PhoneGap plugin, working to follow the HTML5 Web SQL API as close as possible. **NOTE** that the API is now different from [davibe / Phonegap-SQLitePlugin](https://github.com/davibe/Phonegap-SQLitePlugin).
